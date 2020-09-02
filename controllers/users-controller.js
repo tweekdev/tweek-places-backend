@@ -1,6 +1,8 @@
 const { v4: uuid4 } = require('uuid');
 const HttpError = require('../models/http-error');
 
+const { validationResult } = require('express-validator');
+
 const DUMMY_USERS = [
   {
     id: 'u1',
@@ -14,6 +16,10 @@ const getUsers = (req, res, next) => {
 };
 
 const signup = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    throw new HttpError(' Could not create a user please try again.', 401);
+  }
   const { name, email, password } = req.body;
 
   const hasUser = DUMMY_USERS.find((u) => u.email === email);
@@ -35,11 +41,15 @@ const signup = (req, res, next) => {
 };
 
 const login = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    throw new HttpError(' Could not login, please try again.', 422);
+  }
   const { email, password } = req.body;
 
   const identifiedUser = DUMMY_USERS.find((u) => u.email === email);
   if (!identifiedUser || identifiedUser.password !== password) {
-    throw new HttpError(' Could not find user, please try again.', 401);
+    throw new HttpError(' Could not find user, please try again.', 422);
   }
 
   res.json({ message: 'Logged in!' });
