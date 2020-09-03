@@ -5,7 +5,6 @@ const getCoordsForAddress = require('../util/location');
 const Place = require('../models/place');
 
 const getPlaceById = async (req, res, next) => {
-  console.log('GET request in places');
   const placeId = req.params.pid; //{pid: p1}
   let place;
   try {
