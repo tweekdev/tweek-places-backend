@@ -4,7 +4,7 @@ const getCoordsForAddress = require('../util/location');
 const Place = require('../models/place');
 const User = require('../models/user');
 const mongoose = require('mongoose');
-
+const fs = require('fs');
 const getPlaceById = async (req, res, next) => {
   const placeId = req.params.pid; //{pid: p1}
   let place;
@@ -42,7 +42,7 @@ const getPlacesByUserId = async (req, res, next) => {
   }
   if (!places || places.length === 0) {
     return next(
-      HttpError('Could not find places for the provided user id.', 404)
+      new HttpError('Could not find places for the provided user id.', 404)
     );
   }
   res.json({
@@ -72,8 +72,7 @@ const createPlace = async (req, res, next) => {
     description,
     address,
     location: coordinates,
-    image:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
+    image: req.file.path,
     creator,
   });
 
@@ -165,6 +164,8 @@ const deletePlace = async (req, res, next) => {
     return next(error);
   }
 
+  const imagePath = place.image;
+
   try {
     const session = await mongoose.startSession();
     session.startTransaction();
@@ -179,6 +180,10 @@ const deletePlace = async (req, res, next) => {
     );
     return next(error);
   }
+
+  fs.unlink(imagePath, (err) => {
+    console.log(err);
+  });
 
   res.status(200).json({ message: 'Place deleted.' });
 };
