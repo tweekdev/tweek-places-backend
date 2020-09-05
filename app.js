@@ -45,7 +45,8 @@ app.use((error, req, res, next) => {
 
 mongoose
   .connect(
-    'mongodb+srv://tweekdev:Moitja54@cluster0.83jp8.mongodb.net/places_tweek?retryWrites=true&w=majority'
+    'mongodb+srv://tweekdev:Moitja54@cluster0.83jp8.mongodb.net/places_tweek?retryWrites=true&w=majority',
+    { useCreateIndex: true, useUnifiedTopology: true, useNewUrlParser: true }
   )
   .then(() => {
     app.listen(5000);
