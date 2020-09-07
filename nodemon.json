@@ -1,0 +1,10 @@
+{
+  "env": {
+    "DB_USER": "tweekdevprod",
+    "DB_PASSWORDS": "Moitja54",
+    "DB_PASSWORD": "Xv2mPjOhrhnOds1S",
+    "DB_NAME": "places_tweek",
+    "GOOGLE_API_KEY": "AIzaSyD11OD666ccE1t2_hH8LrQkt3rA451unYs",
+    "JWT_KEY": "supersecret_dont_share"
+  }
+}
