@@ -7,6 +7,7 @@ const placesRoutes = require('./routes/places-routes');
 const usersRoutes = require('./routes/users-routes');
 const path = require('path');
 const app = express();
+require('dotenv').config();
 
 app.use(bodyParser.json());
 
