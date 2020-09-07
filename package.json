@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "node app.js"
   },
   "author": "tweekdev",
   "license": "ISC",
@@ -22,14 +22,5 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tweekdev/tweekplace-backend.git"
-  },
-  "bugs": {
-    "url": "https://github.com/tweekdev/tweekplace-backend/issues"
-  },
-  "homepage": "https://github.com/tweekdev/tweekplace-backend#readme",
-  "description": ""
+  }
 }
